@@ -3,171 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cosmos Sport HR | Welcome</title>
+    <title>Cosmos Sport HR | Talent Assessment</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --cosmos-red: #e30613;
-            --bg: #050505;
-        }
-
-        body {
-            font-family: 'Montserrat', sans-serif;
-            background: var(--bg);
-            margin: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            overflow: hidden;
-            color: white;
-        }
-
-        .bg-glow {
-            position: absolute;
-            width: 400px;
-            height: 400px;
-            background: var(--cosmos-red);
-            filter: blur(180px);
-            border-radius: 50%;
-            z-index: -1;
-            opacity: 0.15;
-            animation: move 12s infinite alternate;
-        }
-
-        @keyframes move {
-            from { transform: translate(-30%, -30%); }
-            to { transform: translate(30%, 30%); }
-        }
-
-        .container {
-            width: 95%;
-            max-width: 500px;
-            background: rgba(255, 255, 255, 0.02);
-            backdrop-filter: blur(25px);
-            padding: 45px;
-            border-radius: 40px;
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            text-align: center;
-            box-shadow: 0 30px 60px rgba(0,0,0,0.8);
-        }
-
-        .logo {
-            width: 240px;
-            margin-bottom: 25px;
-            transition: 0.5s ease;
-        }
-
-        /* Welcome Screen Styling */
-        #welcome-screen {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            animation: fadeIn 0.8s ease;
-        }
-
-        .welcome-title {
-            font-size: 1.8rem;
-            font-weight: 900;
-            margin-bottom: 15px;
-            letter-spacing: -1px;
-        }
-
-        .welcome-sub {
-            color: #888;
-            font-size: 0.95rem;
-            line-height: 1.6;
-            margin-bottom: 35px;
-        }
-
-        /* Quiz Styling */
-        #quiz-section { display: none; animation: fadeIn 0.5s ease; }
+        :root { --cosmos-red: #e30613; --bg: #050505; }
+        body { font-family: 'Montserrat', sans-serif; background: var(--bg); margin: 0; display: flex; justify-content: center; align-items: center; min-height: 100vh; color: white; overflow-x: hidden; }
         
-        .progress-bar {
-            height: 4px;
-            background: rgba(255,255,255,0.05);
-            border-radius: 10px;
-            margin-bottom: 35px;
-            overflow: hidden;
-        }
+        .bg-glow { position: absolute; width: 450px; height: 450px; background: var(--cosmos-red); filter: blur(180px); border-radius: 50%; z-index: -1; opacity: 0.15; animation: move 12s infinite alternate; }
+        @keyframes move { from { transform: translate(-25%, -25%); } to { transform: translate(25%, 25%); } }
 
-        #fill {
-            height: 100%;
-            width: 0%;
-            background: var(--cosmos-red);
-            transition: 0.6s cubic-bezier(0.22, 1, 0.36, 1);
-            box-shadow: 0 0 10px var(--cosmos-red);
-        }
+        .container { width: 95%; max-width: 500px; background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(25px); padding: 45px; border-radius: 40px; border: 1px solid rgba(255, 255, 255, 0.1); text-align: center; box-shadow: 0 30px 60px rgba(0,0,0,0.8); }
+        .logo { width: 220px; margin-bottom: 30px; }
 
-        .question-box h2 {
-            font-size: 1.25rem;
-            font-weight: 700;
-            margin-bottom: 30px;
-            line-height: 1.4;
-        }
+        .screen { display: none; animation: fadeIn 0.6s ease; }
+        .active { display: block; }
 
-        .options { display: grid; gap: 14px; }
+        h2 { font-weight: 900; font-size: 1.7rem; margin-bottom: 20px; text-transform: uppercase; letter-spacing: -1px; }
+        p { color: #999; font-size: 0.95rem; line-height: 1.6; margin-bottom: 30px; }
 
-        .opt {
-            background: rgba(255,255,255,0.04);
-            padding: 18px 22px;
-            border-radius: 18px;
-            border: 1px solid rgba(255,255,255,0.05);
-            cursor: pointer;
-            transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            text-align: left;
-            font-size: 0.95rem;
-        }
+        /* Form Inputs */
+        .form-row { display: flex; gap: 15px; margin-bottom: 15px; }
+        .form-group { text-align: left; flex: 1; }
+        label { display: block; font-size: 0.7rem; letter-spacing: 1px; text-transform: uppercase; color: var(--cosmos-red); font-weight: 700; margin-bottom: 8px; }
+        input { width: 100%; padding: 16px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); background: rgba(0,0,0,0.4); color: white; font-family: 'Montserrat', sans-serif; box-sizing: border-box; outline: none; transition: 0.3s; }
+        input:focus { border-color: var(--cosmos-red); background: rgba(255,255,255,0.05); }
 
-        .opt:hover {
-            background: rgba(255,255,255,0.08);
-            transform: translateX(8px);
-            border-color: rgba(255,255,255,0.2);
-        }
+        /* Quiz */
+        .progress-bar { height: 4px; background: rgba(255,255,255,0.05); border-radius: 10px; margin-bottom: 35px; overflow: hidden; }
+        #fill { height: 100%; width: 0%; background: var(--cosmos-red); transition: 0.6s ease; box-shadow: 0 0 15px var(--cosmos-red); }
+        .options { display: grid; gap: 12px; }
+        .opt { background: rgba(255,255,255,0.04); padding: 18px; border-radius: 15px; border: 1px solid rgba(255,255,255,0.05); cursor: pointer; transition: 0.3s; text-align: left; font-size: 0.95rem; }
+        .opt:hover { background: rgba(255,255,255,0.08); transform: translateX(5px); }
+        .opt.selected { border-color: var(--cosmos-red); background: rgba(227, 6, 19, 0.15); }
 
-        .opt.selected {
-            border-color: var(--cosmos-red);
-            background: rgba(227, 6, 19, 0.12);
-        }
+        /* ΣΤΑΘΕΡΟ ΚΟΚΚΙΝΟ ΚΟΥΜΠΙ */
+        .btn-main { width: 100%; padding: 20px; border-radius: 18px; border: none; background: var(--cosmos-red); color: white; font-weight: 900; text-transform: uppercase; cursor: pointer; font-family: 'Montserrat', sans-serif; transition: 0.3s; letter-spacing: 1px; margin-top: 30px; box-shadow: 0 10px 25px rgba(227, 6, 19, 0.3); }
+        .btn-main:hover { transform: translateY(-3px); box-shadow: 0 15px 30px rgba(227, 6, 19, 0.5); }
+        .btn-back { background: transparent; color: #555; border: none; margin-top: 15px; font-weight: 700; cursor: pointer; text-transform: uppercase; font-size: 0.75rem; }
 
-        .footer-btns {
-            margin-top: 40px;
-            display: flex;
-            gap: 12px;
-        }
-
-        button {
-            flex: 1;
-            padding: 20px;
-            border-radius: 18px;
-            border: none;
-            font-weight: 900;
-            text-transform: uppercase;
-            cursor: pointer;
-            font-family: 'Montserrat', sans-serif;
-            transition: 0.3s;
-            letter-spacing: 1px;
-        }
-
-        .next { background: var(--cosmos-red); color: white; }
-        .next:hover { transform: scale(1.03); box-shadow: 0 10px 25px rgba(227, 6, 19, 0.3); }
-        
-        .back { background: transparent; color: #555; }
-        .back:hover { color: white; }
-
-        #result { display: none; animation: fadeIn 0.8s ease; }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(15px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .score-val {
-            font-size: 3.5rem;
-            font-weight: 900;
-            color: var(--cosmos-red);
-            margin: 15px 0;
-        }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body>
@@ -175,115 +49,141 @@
 <div class="bg-glow"></div>
 
 <div class="container">
-    <img src="images.png" alt="Cosmos Sport" class="logo" onerror="this.src='https://via.placeholder.com/200x60/000000/ffffff?text=COSMOS+SPORT'">
+    <img src="images.png" alt="Cosmos Sport" class="logo" id="logo" onerror="this.src='https://via.placeholder.com/200x60/000000/ffffff?text=COSMOS+SPORT'">
 
-    <div id="welcome-screen">
-        <div class="welcome-title">Γίνε μέλος της ομάδας!</div>
-        <p class="welcome-sub">
-            Θέλεις να εργαστείς στο πιο δυναμικό περιβάλλον στον χώρο του αθλητισμού; 
-            Απάντησε σε 6 γρήγορες ερωτήσεις για να δούμε αν έχεις το <b>Cosmos DNA</b>!
-        </p>
-        <button class="next" onclick="startQuiz()">Ξεκιναμε</button>
+    <div id="scr-welcome" class="screen active">
+        <h2>Join the Squad.</h2>
+        <p>Θέλεις να εργαστείς στο πιο δυναμικό περιβάλλον στον χώρο του αθλητισμού; Δες αν έχεις το <b>Cosmos DNA</b>!</p>
+        <button class="btn-main" onclick="nextScreen('scr-form')">Ξεκινάμε</button>
     </div>
 
-    <div id="quiz-section">
+    <div id="scr-form" class="screen">
+        <h2>Who are you?</h2>
+        <p>Συμπλήρωσε τα στοιχεία σου για να ξεκινήσει το scouting.</p>
+        <div class="form-row">
+            <div class="form-group">
+                <label>Όνομα</label>
+                <input type="text" id="fname" placeholder="Γιάννης">
+            </div>
+            <div class="form-group">
+                <label>Επίθετο</label>
+                <input type="text" id="lname" placeholder="Παπαδόπουλος">
+            </div>
+        </div>
+        <div class="form-group">
+            <label>Email Address</label>
+            <input type="email" id="email" placeholder="john@example.com">
+        </div>
+        <button class="btn-main" onclick="validateForm()">Συνέχεια</button>
+    </div>
+
+    <div id="scr-quiz" class="screen">
         <div class="progress-bar"><div id="fill"></div></div>
-        <div class="question-box">
-            <h2 id="q-text"></h2>
-            <div class="options" id="opt-container"></div>
-        </div>
-        <div class="footer-btns">
-            <button class="back" onclick="changeStep(-1)" id="btn-back">Πίσω</button>
-            <button class="next" onclick="changeStep(1)" id="btn-next">Επόμενο</button>
-        </div>
+        <h2 id="q-text" style="font-size: 1.25rem;"></h2>
+        <div class="options" id="opt-container"></div>
+        <button class="btn-main" id="btn-next" onclick="nextQ()">Επόμενο</button>
+        <button class="btn-back" id="btn-back" onclick="prevQ()">Πίσω</button>
     </div>
 
-    <div id="result">
-        <div style="font-size: 3rem;">🔥</div>
-        <div class="score-val" id="score-text">0%</div>
+    <div id="scr-result" class="screen">
+        <div id="res-emoji" style="font-size: 4rem; margin-bottom: 10px;">🔥</div>
+        <div id="res-score" style="font-size: 3.5rem; font-weight: 900; color: var(--cosmos-red); margin-bottom: 10px;">0%</div>
         <h2 id="res-title"></h2>
-        <p id="res-desc" style="color: #888; line-height: 1.7; margin-bottom: 30px;"></p>
-        <button class="next" onclick="location.reload()" style="width:100%;">Επιστροφη στην αρχη</button>
+        <p id="res-desc"></p>
+        <button class="btn-main" onclick="location.reload()">Κλείσιμο</button>
     </div>
 </div>
 
 <script>
     const questions = [
-        { q: "Πόσο σημαντικός είναι ο αθλητισμός στη ζωή σου;", a: ["Τρόπος ζωής / Αθλητής", "Αθλούμαι συχνά", "Αγαπώ το athletic style", "Δεν ασχολούμαι"], weights: [10, 8, 5, 0] },
-        { q: "Είσαι έτοιμος/η να δουλέψεις σε κυλιόμενο ωράριο (Σάββατα/Γιορτές);", a: ["Φυσικά, κανένα πρόβλημα!", "Συνήθως ναι", "Μόνο αν υπάρχει ανάγκη", "Όχι, θέλω σταθερό ωράριο"], weights: [10, 7, 3, -20] },
-        { q: "Τι θα έκανες αν ένας πελάτης ήταν δυσαρεστημένος;", a: ["Θα άκουγα με υπομονή και θα έδινα λύση", "Θα καλούσα τον υπεύθυνο", "Θα ζητούσα συγγνώμη", "Θα προσπαθούσα να τελειώσω γρήγορα"], weights: [10, 7, 5, 2] },
-        { q: "Σου αρέσει να δουλεύεις σε ομάδα;", a: ["Πάντα! Together We Grow", "Μου αρέσει η συνεργασία", "Προτιμώ να δουλεύω μόνος", "Εξαρτάται από τους άλλους"], weights: [10, 8, 2, 5] },
-        { q: "Πόσο καλά γνωρίζεις τα αθλητικά brands;", a: ["Τα παρακολουθώ καθημερινά", "Γνωρίζω τα βασικά", "Μαθαίνω γρήγορα", "Δεν έχω ιδιαίτερη γνώση"], weights: [10, 8, 7, 2] },
-        { q: "Τι θα πρότεινες σε κάποιον που ψάχνει παπούτσια running;", a: ["Θα τον ρωτούσα για το έδαφος και τη χρήση", "Θα του έδειχνα τα best sellers", "Θα του έδειχνα τα πιο ακριβά", "Θα του έδειχνα αυτά που μου αρέσουν"], weights: [10, 7, 2, 3] }
+        { q: "Πόσο σημαντικός είναι ο αθλητισμός στη ζωή σου;", a: ["Τρόπος ζωής / Αθλητής", "Αθλούμαι συχνά", "Αγαπώ το athletic style", "Δεν ασχολούμαι"], w: [10, 8, 5, 0] },
+        { q: "Είσαι έτοιμος/η να δουλέψεις σε κυλιόμενο ωράριο (Σάββατα/Γιορτές);", a: ["Φυσικά, κανένα πρόβλημα!", "Συνήθως ναι", "Μόνο αν υπάρχει ανάγκη", "Όχι, θέλω σταθερό ωράριο"], w: [10, 7, 3, -20] },
+        { q: "Τι θα έκανες αν ένας πελάτης ήταν δυσαρεστημένος;", a: ["Θα άκουγα με υπομονή και θα έδινα λύση", "Θα καλούσα τον υπεύθυνο", "Θα ζητούσα συγγνώμη", "Θα προσπαθούσα να τελειώσω γρήγορα"], w: [10, 7, 5, 2] },
+        { q: "Σου αρέσει να δουλεύεις σε ομάδα;", a: ["Πάντα! Together We Grow", "Μου αρέσει η συνεργασία", "Προτιμώ να δουλεύω μόνος", "Εξαρτάται από τους άλλους"], w: [10, 8, 2, 5] },
+        { q: "Πόσο καλά γνωρίζεις τα αθλητικά brands;", a: ["Τα παρακολουθώ καθημερινά", "Γνωρίζω τα βασικά", "Μαθαίνω γρήγορα", "Δεν έχω ιδιαίτερη γνώση"], w: [10, 8, 7, 2] },
+        { q: "Τι θα πρότεινες σε κάποιον που ψάχνει παπούτσια running;", a: ["Θα τον ρωτούσα για το έδαφος και τη χρήση", "Θα του έδειχνα τα best sellers", "Θα του έδειχνα τα πιο ακριβά", "Θα του έδειχνα αυτά που μου αρέσουν"], w: [10, 7, 2, 3] }
     ];
 
-    let step = 0;
+    let current = 0;
     let userAnswers = [];
+    let userData = {};
 
-    function startQuiz() {
-        document.getElementById('welcome-screen').style.display = 'none';
-        document.getElementById('quiz-section').style.display = 'block';
-        render();
+    function nextScreen(id) {
+        document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+        document.getElementById(id).classList.add('active');
     }
 
-    function render() {
-        const current = questions[step];
-        const qText = document.getElementById('q-text');
-        
-        // Ομαλό animation αλλαγής κειμένου
-        qText.style.opacity = 0;
-        setTimeout(() => {
-            qText.innerText = current.q;
-            qText.style.opacity = 1;
-        }, 150);
+    function validateForm() {
+        const fn = document.getElementById('fname').value;
+        const ln = document.getElementById('lname').value;
+        const em = document.getElementById('email').value;
+        if(!fn || !ln || !em) { alert("Συμπλήρωσε όλα τα πεδία!"); return; }
+        userData = { fn, ln, em };
+        nextScreen('scr-quiz');
+        renderQ();
+    }
 
-        document.getElementById('fill').style.width = ((step + 1) / questions.length * 100) + "%";
-        document.getElementById('btn-back').style.visibility = step === 0 ? "hidden" : "visible";
-        document.getElementById('btn-next').innerText = step === questions.length - 1 ? "Ολοκληρωση" : "Επομενο";
+    function renderQ() {
+        const q = questions[current];
+        document.getElementById('q-text').innerText = q.q;
+        document.getElementById('fill').style.width = ((current + 1) / questions.length * 100) + "%";
         
         const container = document.getElementById('opt-container');
         container.innerHTML = "";
-        current.a.forEach((ans, i) => {
+        q.a.forEach((ans, i) => {
             const div = document.createElement('div');
-            div.className = "opt" + (userAnswers[step] === i ? " selected" : "");
+            div.className = "opt" + (userAnswers[current] === i ? " selected" : "");
             div.innerText = ans;
-            div.onclick = () => { userAnswers[step] = i; render(); };
+            div.onclick = () => { userAnswers[current] = i; renderQ(); };
             container.appendChild(div);
         });
+
+        document.getElementById('btn-back').style.visibility = current === 0 ? "hidden" : "visible";
+        document.getElementById('btn-next').innerText = current === questions.length - 1 ? "Ολοκλήρωση" : "Επόμενο";
     }
 
-    function changeStep(dir) {
-        if (dir === 1 && userAnswers[step] === undefined) {
-            alert("Παρακαλώ επίλεξε μια απάντηση!");
-            return;
+    function nextQ() {
+        if(userAnswers[current] === undefined) { alert("Επίλεξε μια απάντηση!"); return; }
+        if(current < questions.length - 1) {
+            current++;
+            renderQ();
+        } else {
+            showResult();
         }
-        step += dir;
-        if (step >= questions.length) showResult();
-        else render();
+    }
+
+    function prevQ() {
+        if(current > 0) {
+            current--;
+            renderQ();
+        }
     }
 
     function showResult() {
-        document.getElementById('quiz-section').style.display = "none";
-        document.getElementById('result').style.display = "block";
-        
+        nextScreen('scr-result');
         let total = 0;
-        userAnswers.forEach((val, i) => total += questions[i].weights[val]);
-        let percent = Math.max(0, Math.round((total / 60) * 100));
+        userAnswers.forEach((idx, i) => total += questions[i].w[idx]);
+        let score = Math.max(0, Math.round((total / 60) * 100));
         
-        document.getElementById('score-text').innerText = percent + "%";
+        document.getElementById('res-score').innerText = score + "%";
+        const title = document.getElementById('res-title');
+        const desc = document.getElementById('res-desc');
+        const emoji = document.getElementById('res-emoji');
 
-        if (percent >= 80) {
-            document.getElementById('res-title').innerText = "You're a Star!";
-            document.getElementById('res-desc').innerText = "Το προφίλ σου είναι ιδανικό για την Cosmos Sport. Θα επικοινωνήσουμε μαζί σου πολύ σύντομα!";
-        } else if (percent >= 50) {
-            document.getElementById('res-title').innerText = "Great Potential!";
-            document.getElementById('res-desc').innerText = "Έχεις πολύ καλά στοιχεία. Θα θέλαμε να συζητήσουμε περισσότερο σε μια προσωπική συνέντευξη.";
+        if(score >= 85) {
+            emoji.innerText = "🏆";
+            title.innerText = "Elite Match, " + userData.fn + "!";
+            desc.innerText = "Είσαι ακριβώς αυτό που ψάχνουμε! Το DNA σου ταιριάζει απόλυτα στην Cosmos Sport.";
+        } else if(score >= 50) {
+            emoji.innerText = "💪";
+            title.innerText = "Strong Potential!";
+            desc.innerText = "Έχεις πολύ καλά στοιχεία. Θα θέλαμε να σε γνωρίσουμε καλύτερα!";
         } else {
-            document.getElementById('res-title').innerText = "Thank You!";
-            document.getElementById('res-desc').innerText = "Ευχαριστούμε για το ενδιαφέρον. Θα κρατήσουμε το βιογραφικό σου στη βάση μας για μελλοντικές θέσεις.";
+            emoji.innerText = "👍";
+            title.innerText = "Ευχαριστούμε!";
+            desc.innerText = "Θα κρατήσουμε το βιογραφικό σου για μελλοντικές θέσεις που ταιριάζουν στο προφίλ σου.";
         }
     }
 </script>
-
 </body>
 </html>

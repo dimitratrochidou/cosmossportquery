@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cosmos Sport HR | Welcome</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --cosmos-red: #e30613;
+            --bg: #050505;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: var(--bg);
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+            color: white;
+        }
+
+        .bg-glow {
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: var(--cosmos-red);
+            filter: blur(180px);
+            border-radius: 50%;
+            z-index: -1;
+            opacity: 0.15;
+            animation: move 12s infinite alternate;
+        }
+
+        @keyframes move {
+            from { transform: translate(-30%, -30%); }
+            to { transform: translate(30%, 30%); }
+        }
+
+        .container {
+            width: 95%;
+            max-width: 500px;
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(25px);
+            padding: 45px;
+            border-radius: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            text-align: center;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.8);
+        }
+
+        .logo {
+            width: 240px;
+            margin-bottom: 25px;
+            transition: 0.5s ease;
+        }
+
+        /* Welcome Screen Styling */
+        #welcome-screen {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            animation: fadeIn 0.8s ease;
+        }
+
+        .welcome-title {
+            font-size: 1.8rem;
+            font-weight: 900;
+            margin-bottom: 15px;
+            letter-spacing: -1px;
+        }
+
+        .welcome-sub {
+            color: #888;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 35px;
+        }
+
+        /* Quiz Styling */
+        #quiz-section { display: none; animation: fadeIn 0.5s ease; }
+        
+        .progress-bar {
+            height: 4px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 10px;
+            margin-bottom: 35px;
+            overflow: hidden;
+        }
+
+        #fill {
+            height: 100%;
+            width: 0%;
+            background: var(--cosmos-red);
+            transition: 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+            box-shadow: 0 0 10px var(--cosmos-red);
+        }
+
+        .question-box h2 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 30px;
+            line-height: 1.4;
+        }
+
+        .options { display: grid; gap: 14px; }
+
+        .opt {
+            background: rgba(255,255,255,0.04);
+            padding: 18px 22px;
+            border-radius: 18px;
+            border: 1px solid rgba(255,255,255,0.05);
+            cursor: pointer;
+            transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            text-align: left;
+            font-size: 0.95rem;
+        }
+
+        .opt:hover {
+            background: rgba(255,255,255,0.08);
+            transform: translateX(8px);
+            border-color: rgba(255,255,255,0.2);
+        }
+
+        .opt.selected {
+            border-color: var(--cosmos-red);
+            background: rgba(227, 6, 19, 0.12);
+        }
+
+        .footer-btns {
+            margin-top: 40px;
+            display: flex;
+            gap: 12px;
+        }
+
+        button {
+            flex: 1;
+            padding: 20px;
+            border-radius: 18px;
+            border: none;
+            font-weight: 900;
+            text-transform: uppercase;
+            cursor: pointer;
+            font-family: 'Montserrat', sans-serif;
+            transition: 0.3s;
+            letter-spacing: 1px;
+        }
+
+        .next { background: var(--cosmos-red); color: white; }
+        .next:hover { transform: scale(1.03); box-shadow: 0 10px 25px rgba(227, 6, 19, 0.3); }
+        
+        .back { background: transparent; color: #555; }
+        .back:hover { color: white; }
+
+        #result { display: none; animation: fadeIn 0.8s ease; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .score-val {
+            font-size: 3.5rem;
+            font-weight: 900;
+            color: var(--cosmos-red);
+            margin: 15px 0;
+        }
+    </style>
+</head>
+<body>
+
+<div class="bg-glow"></div>
+
+<div class="container">
+    <img src="images.png" alt="Cosmos Sport" class="logo" onerror="this.src='https://via.placeholder.com/200x60/000000/ffffff?text=COSMOS+SPORT'">
+
+    <div id="welcome-screen">
+        <div class="welcome-title">Γίνε μέλος της ομάδας!</div>
+        <p class="welcome-sub">
+            Θέλεις να εργαστείς στο πιο δυναμικό περιβάλλον στον χώρο του αθλητισμού; 
+            Απάντησε σε 6 γρήγορες ερωτήσεις για να δούμε αν έχεις το <b>Cosmos DNA</b>!
+        </p>
+        <button class="next" onclick="startQuiz()">Ξεκιναμε</button>
+    </div>
+
+    <div id="quiz-section">
+        <div class="progress-bar"><div id="fill"></div></div>
+        <div class="question-box">
+            <h2 id="q-text"></h2>
+            <div class="options" id="opt-container"></div>
+        </div>
+        <div class="footer-btns">
+            <button class="back" onclick="changeStep(-1)" id="btn-back">Πίσω</button>
+            <button class="next" onclick="changeStep(1)" id="btn-next">Επόμενο</button>
+        </div>
+    </div>
+
+    <div id="result">
+        <div style="font-size: 3rem;">🔥</div>
+        <div class="score-val" id="score-text">0%</div>
+        <h2 id="res-title"></h2>
+        <p id="res-desc" style="color: #888; line-height: 1.7; margin-bottom: 30px;"></p>
+        <button class="next" onclick="location.reload()" style="width:100%;">Επιστροφη στην αρχη</button>
+    </div>
+</div>
+
+<script>
+    const questions = [
+        { q: "Πόσο σημαντικός είναι ο αθλητισμός στη ζωή σου;", a: ["Τρόπος ζωής / Αθλητής", "Αθλούμαι συχνά", "Αγαπώ το athletic style", "Δεν ασχολούμαι"], weights: [10, 8, 5, 0] },
+        { q: "Είσαι έτοιμος/η να δουλέψεις σε κυλιόμενο ωράριο (Σάββατα/Γιορτές);", a: ["Φυσικά, κανένα πρόβλημα!", "Συνήθως ναι", "Μόνο αν υπάρχει ανάγκη", "Όχι, θέλω σταθερό ωράριο"], weights: [10, 7, 3, -20] },
+        { q: "Τι θα έκανες αν ένας πελάτης ήταν δυσαρεστημένος;", a: ["Θα άκουγα με υπομονή και θα έδινα λύση", "Θα καλούσα τον υπεύθυνο", "Θα ζητούσα συγγνώμη", "Θα προσπαθούσα να τελειώσω γρήγορα"], weights: [10, 7, 5, 2] },
+        { q: "Σου αρέσει να δουλεύεις σε ομάδα;", a: ["Πάντα! Together We Grow", "Μου αρέσει η συνεργασία", "Προτιμώ να δουλεύω μόνος", "Εξαρτάται από τους άλλους"], weights: [10, 8, 2, 5] },
+        { q: "Πόσο καλά γνωρίζεις τα αθλητικά brands;", a: ["Τα παρακολουθώ καθημερινά", "Γνωρίζω τα βασικά", "Μαθαίνω γρήγορα", "Δεν έχω ιδιαίτερη γνώση"], weights: [10, 8, 7, 2] },
+        { q: "Τι θα πρότεινες σε κάποιον που ψάχνει παπούτσια running;", a: ["Θα τον ρωτούσα για το έδαφος και τη χρήση", "Θα του έδειχνα τα best sellers", "Θα του έδειχνα τα πιο ακριβά", "Θα του έδειχνα αυτά που μου αρέσουν"], weights: [10, 7, 2, 3] }
+    ];
+
+    let step = 0;
+    let userAnswers = [];
+
+    function startQuiz() {
+        document.getElementById('welcome-screen').style.display = 'none';
+        document.getElementById('quiz-section').style.display = 'block';
+        render();
+    }
+
+    function render() {
+        const current = questions[step];
+        const qText = document.getElementById('q-text');
+        
+        // Ομαλό animation αλλαγής κειμένου
+        qText.style.opacity = 0;
+        setTimeout(() => {
+            qText.innerText = current.q;
+            qText.style.opacity = 1;
+        }, 150);
+
+        document.getElementById('fill').style.width = ((step + 1) / questions.length * 100) + "%";
+        document.getElementById('btn-back').style.visibility = step === 0 ? "hidden" : "visible";
+        document.getElementById('btn-next').innerText = step === questions.length - 1 ? "Ολοκληρωση" : "Επομενο";
+        
+        const container = document.getElementById('opt-container');
+        container.innerHTML = "";
+        current.a.forEach((ans, i) => {
+            const div = document.createElement('div');
+            div.className = "opt" + (userAnswers[step] === i ? " selected" : "");
+            div.innerText = ans;
+            div.onclick = () => { userAnswers[step] = i; render(); };
+            container.appendChild(div);
+        });
+    }
+
+    function changeStep(dir) {
+        if (dir === 1 && userAnswers[step] === undefined) {
+            alert("Παρακαλώ επίλεξε μια απάντηση!");
+            return;
+        }
+        step += dir;
+        if (step >= questions.length) showResult();
+        else render();
+    }
+
+    function showResult() {
+        document.getElementById('quiz-section').style.display = "none";
+        document.getElementById('result').style.display = "block";
+        
+        let total = 0;
+        userAnswers.forEach((val, i) => total += questions[i].weights[val]);
+        let percent = Math.max(0, Math.round((total / 60) * 100));
+        
+        document.getElementById('score-text').innerText = percent + "%";
+
+        if (percent >= 80) {
+            document.getElementById('res-title').innerText = "You're a Star!";
+            document.getElementById('res-desc').innerText = "Το προφίλ σου είναι ιδανικό για την Cosmos Sport. Θα επικοινωνήσουμε μαζί σου πολύ σύντομα!";
+        } else if (percent >= 50) {
+            document.getElementById('res-title').innerText = "Great Potential!";
+            document.getElementById('res-desc').innerText = "Έχεις πολύ καλά στοιχεία. Θα θέλαμε να συζητήσουμε περισσότερο σε μια προσωπική συνέντευξη.";
+        } else {
+            document.getElementById('res-title').innerText = "Thank You!";
+            document.getElementById('res-desc').innerText = "Ευχαριστούμε για το ενδιαφέρον. Θα κρατήσουμε το βιογραφικό σου στη βάση μας για μελλοντικές θέσεις.";
+        }
+    }
+</script>
+
+</body>
+</html>
